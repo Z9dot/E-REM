@@ -28,7 +28,7 @@ public class loginScreen extends JFrame {
         JPanel IconPanel, CredentialsPanel;
 
         IconPanel = new JPanel(new GridLayout(3, 0));
-        ImageIcon icon = new ImageIcon("logo icon.png", "E-REM");
+        ImageIcon icon = new ImageIcon("images/logo icon.png", "E-REM");
         JLabel image = new JLabel(icon);
         IconPanel.add(image);
 
@@ -54,12 +54,15 @@ public class loginScreen extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (verifyLogin(getUserEmail(), getUserPassword())) {
+                if (verifyLogin(emailAddressField.getText(), passwordField.getPassword().toString())) {
                     try {
                         homeScreen homeScreen = new homeScreen();
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
+                } else {
+                    JOptionPane.showMessageDialog(loginButton, "Invalid Credentials!", "Message",
+                            ABORT, icon);
                 }
             }
 
@@ -86,7 +89,11 @@ public class loginScreen extends JFrame {
 
     // Sample login verification method
     private boolean verifyLogin(String email, String password) {
-        boolean check = false;
-        return email.equals("test@example.com") && password.equals("password");
+        if (email.equals("zainhashmi692@gmail.com") && password.equals("alizainqurehi")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
+// 674980207735-po7cdsn1s28gr547q58mbmdgt8621c7n.apps.googleusercontent.com
