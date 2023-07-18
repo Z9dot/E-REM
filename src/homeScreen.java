@@ -12,7 +12,7 @@ import java.io.IOException;
 
 class homeScreen extends JFrame implements ActionListener {
     public static void main(String[] args) throws IOException {
-        homeScreen hs = new homeScreen();
+        homeScreen hs = new homeScreen("Email Address");
         hs.setVisible(true);
 
     }
@@ -61,7 +61,7 @@ class homeScreen extends JFrame implements ActionListener {
         return accCredentials;
     }
 
-    public homeScreen() throws IOException {
+    public homeScreen(String UserEmail) throws IOException {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1366, 768);
@@ -135,10 +135,10 @@ class homeScreen extends JFrame implements ActionListener {
         homeSidebarUpper.setBounds(0, 0, 300, 250);
         homeSidebarUpper.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        dashboard_button = addNewButton(new JButton(), "Dashboard", "dashboard.png");
-        composeMail_Button = addNewButton(new JButton(), "Compose Mail", "single email.png");
-        bulkMail_Button = addNewButton(new JButton(), "Bulk Email", "bulk email.png");
-        manageContact_Button = addNewButton(new JButton(), "Contacts", "contact manager.png");
+        dashboard_button = addNewButton(new JButton(), "Dashboard", "images/dashboard.png");
+        composeMail_Button = addNewButton(new JButton(), "Compose Mail", "images/single email.png");
+        bulkMail_Button = addNewButton(new JButton(), "Bulk Email", "images/bulk email.png");
+        manageContact_Button = addNewButton(new JButton(), "Contacts", "images/contact manager.png");
 
         home1.add(Box.createRigidArea(new Dimension(100, 0)));
         home1.add(sent_Mails);
@@ -147,7 +147,8 @@ class homeScreen extends JFrame implements ActionListener {
         home1.add(Box.createRigidArea(new Dimension(15, 0)));
 
         homeSidebarUpper.add(Box.createRigidArea(new Dimension(44, 25)));
-        homeSidebarUpper.add(accountCredentials("email_Address", "account icon tp.png"));
+        loginScreen ls = new loginScreen();
+        homeSidebarUpper.add(accountCredentials(UserEmail, "images/account icon tp.png"));
 
         homeSidebar.add(Box.createRigidArea(new Dimension(0, 50)));
         homeSidebar.add(dashboard_button);
@@ -184,43 +185,49 @@ class homeScreen extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == dashboard_button) {
-            homeScreen hs = null;
-            try {
-                hs = new homeScreen();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            hs.setVisible(true);
-            dispose();
-        }
-        if (e.getSource() == composeMail_Button) {
-            sendSingleEmail sse = null;
-            try {
-                sse = new sendSingleEmail(null, null, null);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            sse.setVisible(true);
-            dispose();
-
-        }
-        if (e.getSource() == bulkMail_Button) {
-            sendBulkEmail sbe = null;
-            try {
-                sbe = new sendBulkEmail();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            sbe.setVisible(true);
-            dispose();
-        }
-
-        if (e.getSource() == manageContact_Button) {
-            // open contacts management frame
-        }
-
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
+
+    // @Override
+    // public void actionPerformed(ActionEvent e) {
+    // if (e.getSource() == dashboard_button) {
+    // homeScreen hs = null;
+    // try {
+    // hs = new homeScreen();
+    // } catch (IOException ex) {
+    // throw new RuntimeException(ex);
+    // }
+    // hs.setVisible(true);
+    // dispose();
+    // }
+    // if (e.getSource() == composeMail_Button) {
+    // sendSingleEmail sse = null;
+    // try {
+    // sse = new sendSingleEmail(null, null, null);
+    // } catch (IOException ex) {
+    // throw new RuntimeException(ex);
+    // }
+    // sse.setVisible(true);
+    // dispose();
+
+    // }
+    // if (e.getSource() == bulkMail_Button) {
+    // sendBulkEmail sbe = null;
+    // try {
+    // sbe = new sendBulkEmail();
+    // } catch (IOException ex) {
+    // throw new RuntimeException(ex);
+    // }
+    // sbe.setVisible(true);
+    // dispose();
+    // }
+
+    // if (e.getSource() == manageContact_Button) {
+    // // open contacts management frame
+    // }
+
+    // }
 }
 
 /*
