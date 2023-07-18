@@ -9,21 +9,19 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
-
 public class sendSingleEmail extends JFrame implements ActionListener {
-    /*public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         sendSingleEmail sse = new sendSingleEmail("25", "8", "2022");
-        Sidebar s = new Sidebar();
-        sse.add(s.homeSidebar);
-        sse.add(s.homeSidebarUpper);
-        s.setVisible(true);
-      //  sse.setVisible(true);
-    }*/
+        // Sidebar s = new Sidebar();
+        // sse.add(s.homeSidebar);
+        // sse.add(s.homeSidebarUpper);
+        // s.setVisible(true);
+        sse.setVisible(true);
+    }
 
-   // private final JFrame sendSingleEmail;
+    // private final JFrame sendSingleEmail;
     private JPanel emailStats;
     private JPanel singleForm;
-
 
     private JPanel uploadFile;
     private JPanel sidebar;
@@ -50,17 +48,15 @@ public class sendSingleEmail extends JFrame implements ActionListener {
 
     private boolean isDateFromHomeScreen;
 
-
     public sendSingleEmail(String d, String m, String y) throws IOException {
-       // sendSingleEmail= new sendSingleEmail(null, null, null);
-        setSize(1366, 768);
-        setResizable(false);
-        setTitle("E-REM V 1.0");
-        setLayout(null);
-        setLocationRelativeTo(null);
-        getContentPane().setBackground(new Color(244, 246, 248));
-
-
+        // sendSingleEmail= new sendSingleEmail(null, null, null);
+        homeScreen homeScreen = new homeScreen("userEmail");
+        homeScreen.setSize(1366, 768);
+        homeScreen.setResizable(false);
+        // setTitle("E-REM V 1.0");
+        // setLayout(null);
+        // setLocationRelativeTo(null);
+        // getContentPane().setBackground(new Color(244, 246, 248));
 
         emailStats = new JPanel();
         emailStats.setBackground(Color.WHITE);
@@ -73,15 +69,16 @@ public class sendSingleEmail extends JFrame implements ActionListener {
         Image btn1modified = btn1Image.getImage().getScaledInstance(48, 48, Image.SCALE_SMOOTH);
         btn1Image = new ImageIcon(btn1modified);
 
-        //ICON 2 OF BTN 2
+        // ICON 2 OF BTN 2
         ImageIcon btn2Image = new ImageIcon("failed.png");
         Image btn2modified = btn2Image.getImage().getScaledInstance(48, 48, Image.SCALE_SMOOTH);
         btn2Image = new ImageIcon(btn2modified);
 
-        //Upload file button
+        // Upload file button
         ImageIcon uploadAttachment = new ImageIcon("upload.png");
-        //Image uploadAttachmentModified = uploadAttachment.getImage().getScaledInstance(500, 40, Image.SCALE_SMOOTH);
-        //uploadAttachment = new ImageIcon(uploadAttachmentModified);
+        // Image uploadAttachmentModified =
+        // uploadAttachment.getImage().getScaledInstance(500, 40, Image.SCALE_SMOOTH);
+        // uploadAttachment = new ImageIcon(uploadAttachmentModified);
 
         ImageIcon sendEmailIcon = new ImageIcon("sendemail.png");
         Image seIModified = sendEmailIcon.getImage().getScaledInstance(48, 48, Image.SCALE_SMOOTH);
@@ -90,7 +87,6 @@ public class sendSingleEmail extends JFrame implements ActionListener {
         ImageIcon scheduleImageIcon = new ImageIcon("scheduleemail.png");
         Image sIIModified = scheduleImageIcon.getImage().getScaledInstance(46, 41, Image.SCALE_SMOOTH);
         scheduleImageIcon = new ImageIcon(sIIModified);
-
 
         JButton b1 = new JButton();
         b1.setText("5");
@@ -126,8 +122,7 @@ public class sendSingleEmail extends JFrame implements ActionListener {
         emailSuccessMessage.setMaximumSize(new Dimension(500, 35));
         emailSuccessMessage.setVisible(false);
 
-
-        attachmentPresent=false;
+        attachmentPresent = false;
         // Attachment button
         attachment = new JButton();
         attachment.setMaximumSize(new Dimension(64, 64));
@@ -140,25 +135,23 @@ public class sendSingleEmail extends JFrame implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // open fileopener
-                JFileChooser jFile= new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-                int x= jFile.showOpenDialog(null);
-                if (x ==JFileChooser.APPROVE_OPTION){
-                    file= jFile.getSelectedFile().getAbsoluteFile();
-                    attachmentPresent=true;
+                JFileChooser jFile = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                int x = jFile.showOpenDialog(null);
+                if (x == JFileChooser.APPROVE_OPTION) {
+                    file = jFile.getSelectedFile().getAbsoluteFile();
+                    attachmentPresent = true;
                 }
                 System.out.println("Kindly select the attachment file");
 
             }
         });
-                // attachment.setIcon(uploadAttachment);
-
+        // attachment.setIcon(uploadAttachment);
 
         singleForm = new JPanel();
         BoxLayout h2L = new BoxLayout(singleForm, BoxLayout.Y_AXIS);
         singleForm.setLayout(h2L);
         singleForm.setBounds(300, 160, 1366, 769);
         singleForm.setBackground(null);
-
 
         uploadFile = new JPanel();
         BoxLayout uploadBox = new BoxLayout(uploadFile, BoxLayout.X_AXIS);
@@ -176,10 +169,9 @@ public class sendSingleEmail extends JFrame implements ActionListener {
         field1.setLayout(field1box);
         field1.setBackground(null);
         rEmail = new JLabel();
-        if (d!=null){
+        if (d != null) {
             rEmail.setText("Reminder Email: ");
-        }
-        else{
+        } else {
             rEmail.setText("Recipient Email: ");
         }
 
@@ -192,20 +184,18 @@ public class sendSingleEmail extends JFrame implements ActionListener {
         field1.add(rEmailField);
 
         field2 = new JPanel();
-        if (d!=null){
+        if (d != null) {
             rEmail.setText("Reminder Email: ");
-        }
-        else{
+        } else {
             rEmail.setText("Recipient Email: ");
         }
         BoxLayout field2box = new BoxLayout(field2, BoxLayout.X_AXIS);
         field2.setLayout(field2box);
         field2.setBackground(null);
         eSubject = new JLabel();
-        if (d!=null){
+        if (d != null) {
             eSubject.setText("Reminder Info: ");
-        }
-        else{
+        } else {
             eSubject.setText("Email Subject: ");
         }
         eSubject.setFont(new Font("Open Sans", Font.BOLD, 16));
@@ -221,10 +211,9 @@ public class sendSingleEmail extends JFrame implements ActionListener {
         field3.setLayout(field3box);
         field3.setBackground(null);
         rMessage = new JLabel();
-        if (d!=null){
+        if (d != null) {
             rMessage.setText("Reminder: ");
-        }
-        else{
+        } else {
             rMessage.setText("Message: ");
         }
         rMessage.setFont(new Font("Open Sans", Font.BOLD, 16));
@@ -240,33 +229,32 @@ public class sendSingleEmail extends JFrame implements ActionListener {
         field4.setLayout(field4box);
         field4.setBackground(null);
 
-        /*field5= new JPanel();
-        BoxLayout field5box = new BoxLayout(field5, BoxLayout.X_AXIS);
-        field4.setLayout(field5box);
-        field4.setBackground(null);*/
+        /*
+         * field5= new JPanel();
+         * BoxLayout field5box = new BoxLayout(field5, BoxLayout.X_AXIS);
+         * field4.setLayout(field5box);
+         * field4.setBackground(null);
+         */
 
-
-            sendButton = new JButton();
-            sendButton.setText("SEND EMAIL");
-            sendButton.setVisible(true);
-            sendButton.setIcon(sendEmailIcon);
-            sendButton.setHorizontalTextPosition(AbstractButton.TRAILING);
-            sendButton.setFocusable(false);
-            sendButton.setFont(new Font("Open Sans", Font.BOLD, 16));
-            sendButton.setBackground(new Color(255, 182, 117));
-            sendButton.setForeground(Color.BLACK);
-            sendButton.setMaximumSize(new Dimension(150, 50));
-            sendButton.addActionListener(this);
+        sendButton = new JButton();
+        sendButton.setText("SEND EMAIL");
+        sendButton.setVisible(true);
+        sendButton.setIcon(sendEmailIcon);
+        sendButton.setHorizontalTextPosition(AbstractButton.TRAILING);
+        sendButton.setFocusable(false);
+        sendButton.setFont(new Font("Open Sans", Font.BOLD, 16));
+        sendButton.setBackground(new Color(255, 182, 117));
+        sendButton.setForeground(Color.BLACK);
+        sendButton.setMaximumSize(new Dimension(150, 50));
+        sendButton.addActionListener(this);
 
         scheduleButton = new JButton();
-        if (d!=null){
+        if (d != null) {
 
-            scheduleButton.setText("SEND ON | "+d+"-"+m+"-"+y);
-        }
-        else{
+            scheduleButton.setText("SEND ON | " + d + "-" + m + "-" + y);
+        } else {
             scheduleButton.setText("SCHEDULE EMAIL");
         }
-
 
         scheduleButton.setIcon(scheduleImageIcon);
         scheduleButton.setHorizontalTextPosition(AbstractButton.TRAILING);
@@ -278,34 +266,38 @@ public class sendSingleEmail extends JFrame implements ActionListener {
         field4.add(Box.createRigidArea(new Dimension(50, 0)));
         scheduleButton.setVisible(true);
         field4.setBorder(new EmptyBorder(50, 60, 0, 540));
-        if(d==null) {          // If date selected for reminder email purpose
+        if (d == null) { // If date selected for reminder email purpose
             field4.add(sendButton);
         }
         field4.add(Box.createRigidArea(new Dimension(45, 0)));
         field4.add(emailSuccessMessage);
         sendButton.setVisible(true);
 
-        scheduleButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (d!=null) {
-                    emailAutomation  scheduledFromCalendar;
-                    try {
-                        scheduledFromCalendar = new emailAutomation("single",attachmentPresent, true, rEmailField.getText(), null, eSubjectField.getText(), rMessageField.getText(), file, d, m, y);
-                    } catch (MessagingException ex) {
-                        throw new RuntimeException(ex);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    scheduledFromCalendar.setVisible(true);
-                }
-                else {
+        // scheduleButton.addActionListener(new ActionListener() {
+        // @Override
+        // public void actionPerformed(ActionEvent e) {
+        // if (d!=null) {
+        // emailAutomation scheduledFromCalendar;
+        // try {
+        // scheduledFromCalendar = new emailAutomation("single",attachmentPresent, true,
+        // rEmailField.getText(), null, eSubjectField.getText(),
+        // rMessageField.getText(), file, d, m, y);
+        // } catch (MessagingException ex) {
+        // throw new RuntimeException(ex);
+        // } catch (IOException ex) {
+        // throw new RuntimeException(ex);
+        // }
+        // scheduledFromCalendar.setVisible(true);
+        // }
+        // else {
 
-                    scheduleEmail schedule= new scheduleEmail("single", attachmentPresent, false, rEmailField.getText(), null, eSubjectField.getText(), rMessageField.getText(), file);
-                    schedule.setVisible(true);
-                }
-            }
-        });
+        // scheduleEmail schedule= new scheduleEmail("single", attachmentPresent, false,
+        // rEmailField.getText(), null, eSubjectField.getText(),
+        // rMessageField.getText(), file);
+        // schedule.setVisible(true);
+        // }
+        // }
+        // });
         scheduleButton.setVisible(true);
         field4.add(scheduleButton);
         emailStats.add(Box.createRigidArea(new Dimension(220, 0)));
@@ -322,17 +314,15 @@ public class sendSingleEmail extends JFrame implements ActionListener {
         singleForm.add(field3);
         singleForm.add(Box.createRigidArea(new Dimension(0, -20)));
         singleForm.add(field4);
-        //  singleForm.add(Box.createRigidArea(new Dimension(0, 7)));
-
+        // singleForm.add(Box.createRigidArea(new Dimension(0, 7)));
 
         emailStats.setVisible(true);
         singleForm.setVisible(true);
-        //  uploadFile.setVisible(true);
+        // uploadFile.setVisible(true);
 
-
-        add(emailStats);
-        add(singleForm);
-        //  add(uploadFile);
+        homeScreen.add(emailStats);
+        homeScreen.add(singleForm);
+        // add(uploadFile);
         Sidebar sb = null;
         try {
             sb = new Sidebar();
@@ -343,34 +333,31 @@ public class sendSingleEmail extends JFrame implements ActionListener {
         add(sb.homeSidebarUpper);
         sb.setVisible(true);
 
-
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == sendButton) {
-
-
-            try {
-                emailAutomation instantEmail= new emailAutomation("single",attachmentPresent, false, rEmailField.getText(), null, eSubjectField.getText(), rMessageField.getText(), file, null, null, null);
-                instantEmail.setVisible(true);
-            } catch (MessagingException ex) {
-                throw new RuntimeException(ex);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-
-
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
     }
 
+    // @Override
+    // public void actionPerformed(ActionEvent e) {
 
+    // if (e.getSource() == sendButton) {
+
+    // try {
+    // emailAutomation instantEmail= new emailAutomation("single",attachmentPresent,
+    // false, rEmailField.getText(), null, eSubjectField.getText(),
+    // rMessageField.getText(), file, null, null, null);
+    // instantEmail.setVisible(true);
+    // } catch (MessagingException ex) {
+    // throw new RuntimeException(ex);
+    // } catch (IOException ex) {
+    // throw new RuntimeException(ex);
+    // }
+    // }
+
+    // }
 
 }
-
-
-
-
-

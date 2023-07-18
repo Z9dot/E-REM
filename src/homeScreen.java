@@ -17,7 +17,7 @@ class homeScreen extends JFrame implements ActionListener {
 
     }
 
-    JPanel home1;
+    JPanel statsPanel;
     JPanel home2;
     JPanel homeSidebar;
     JPanel homeSidebarUpper;
@@ -64,18 +64,20 @@ class homeScreen extends JFrame implements ActionListener {
     public homeScreen(String UserEmail) throws IOException {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1366, 768);
+        setSize(1200, 700);
         setResizable(false);
         setTitle("E-REM V 1.0");
         setLayout(null);
+        setLocationRelativeTo(null);
         // hS.setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(244, 246, 248));
 
-        home1 = new JPanel();
-        home1.setBackground(new Color(244, 246, 248));
-        BoxLayout h1L = new BoxLayout(home1, BoxLayout.X_AXIS);
-        home1.setLayout(h1L);
-        home1.setBounds(300, 0, 1100, 140);
+        statsPanel = new JPanel();
+        statsPanel.setBackground(new Color(244, 246, 248));
+        BoxLayout h1L = new BoxLayout(statsPanel, BoxLayout.X_AXIS);
+        statsPanel.setLayout(h1L);
+        statsPanel.setBounds(300, 0, 1000, 140);
+        statsPanel.setBackground(Color.blue);
 
         // ICON 1 OF BTN1
         ImageIcon btn1Image = new ImageIcon("email.png");
@@ -125,7 +127,7 @@ class homeScreen extends JFrame implements ActionListener {
         // homeSidebar.setBackground(Color.WHITE);
         BoxLayout h3L = new BoxLayout(homeSidebar, BoxLayout.Y_AXIS);
         homeSidebar.setLayout(h3L);
-        homeSidebar.setBounds(0, 120, 300, 780);
+        homeSidebar.setBounds(0, 120, 300, 550);
 
         homeSidebarUpper = new JPanel();
         BoxLayout hsuL = new BoxLayout(homeSidebarUpper, BoxLayout.Y_AXIS);
@@ -140,14 +142,13 @@ class homeScreen extends JFrame implements ActionListener {
         bulkMail_Button = addNewButton(new JButton(), "Bulk Email", "images/bulk email.png");
         manageContact_Button = addNewButton(new JButton(), "Contacts", "images/contact manager.png");
 
-        home1.add(Box.createRigidArea(new Dimension(100, 0)));
-        home1.add(sent_Mails);
-        home1.add(Box.createRigidArea(new Dimension(50, 0)));
-        home1.add(contacts_Count);
-        home1.add(Box.createRigidArea(new Dimension(15, 0)));
+        statsPanel.add(Box.createRigidArea(new Dimension(100, 0)));
+        statsPanel.add(sent_Mails);
+        statsPanel.add(Box.createRigidArea(new Dimension(50, 0)));
+        statsPanel.add(contacts_Count);
+        statsPanel.add(Box.createRigidArea(new Dimension(15, 0)));
 
         homeSidebarUpper.add(Box.createRigidArea(new Dimension(44, 25)));
-        loginScreen ls = new loginScreen();
         homeSidebarUpper.add(accountCredentials(UserEmail, "images/account icon tp.png"));
 
         homeSidebar.add(Box.createRigidArea(new Dimension(0, 50)));
@@ -166,14 +167,17 @@ class homeScreen extends JFrame implements ActionListener {
         bulkMail_Button.addActionListener(this);
         manageContact_Button.addActionListener(this);
 
-        home1.setVisible(true);
-        // home2.setVisible(true);
+        statsPanel.setVisible(true);
+        home2 = new JPanel();
+        home2.setBounds(300, 140, 1000, 550);
+        home2.setBackground(Color.red);
+        home2.setVisible(true);
 
         homeSidebar.setVisible(true);
         homeSidebarUpper.setVisible(true);
 
-        add(home1);
-        // add(home2);
+        add(statsPanel);
+        add(home2);
         add(homeSidebar);
         add(homeSidebarUpper);
 
@@ -185,8 +189,18 @@ class homeScreen extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'actionPerformed'");
+        if (e.getSource() == dashboard_button) {
+
+        }
+        if (e.getSource() == composeMail_Button) {
+            try {
+                sendSingleEmail singleEmailScreen = new sendSingleEmail(null, null, null);
+                singleEmailScreen.setVisible(true);
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
     }
 
     // @Override
