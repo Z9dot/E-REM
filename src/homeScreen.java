@@ -129,14 +129,39 @@ class homeScreen extends JFrame implements ActionListener {
         eSubject = new JLabel("Email Subject: ");
         eSubject.setFont(new Font("Open Sans", Font.BOLD, 16));
         eSubjectField = new JTextField(10);
-        eSubjectField.setMaximumSize(new Dimension(900, 30));
+        eSubjectField.setMaximumSize(new Dimension(900, 20));
         subjectField.setBorder(new EmptyBorder(20, 55, 0, 250));
         subjectField.add(eSubject);
         subjectField.add(Box.createRigidArea(new Dimension(52, 0)));
         subjectField.add(eSubjectField);
 
-        // Message Box
-        JScrollPane scrollPane = new JScrollPane();
+        // // Message Box
+        // messageBoxField = new JPanel();
+        // BoxLayout field3box = new BoxLayout(messageBoxField, BoxLayout.X_AXIS);
+        // messageBoxField.setLayout(field3box);
+        // messageBoxField.setBackground(null);
+        // rMessage = new JLabel("Message: ");
+        // rMessage.setFont(new Font("Open Sans", Font.BOLD, 16));
+        // rMessageField = new JTextArea();
+        // rMessageField.setLineWrap(true);
+
+        // // Add the JTextArea to a JScrollPane to enable scrolling if the text exceeds
+        // // the visible area
+        // JScrollPane scrollPane = new JScrollPane(rMessageField);
+        // scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        // // Add the JScrollPane to the JFrame
+        // messageBoxField.add(scrollPane);
+
+        // // Add the JScrollPane to the JFrame
+
+        // rMessageField.setMaximumSize(new Dimension(1300, 273));
+        // messageBoxField.setBorder(new EmptyBorder(50, 59, 0, 250));
+        // rMessageField.setBorder(new LineBorder(Color.black, 1));
+        // messageBoxField.add(rMessage);
+        // messageBoxField.add(Box.createRigidArea(new Dimension(88, 0)));
+        // messageBoxField.add(rMessageField);
+
         messageBoxField = new JPanel();
         BoxLayout field3box = new BoxLayout(messageBoxField, BoxLayout.X_AXIS);
         messageBoxField.setLayout(field3box);
@@ -144,20 +169,54 @@ class homeScreen extends JFrame implements ActionListener {
         rMessage = new JLabel("Message: ");
         rMessage.setFont(new Font("Open Sans", Font.BOLD, 16));
         rMessageField = new JTextArea();
+        rMessageField.setLineWrap(true);
+        rMessageField.setWrapStyleWord(true); // Wrap words to avoid cutting them
 
-        scrollPane.add(messageBoxField);
-        rMessageField.setMaximumSize(new Dimension(1300, 273));
-        messageBoxField.setBorder(new EmptyBorder(50, 59, 0, 250));
+        JScrollPane scrollPane = new JScrollPane(rMessageField);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        rMessageField.setMaximumSize(new Dimension(1300, 23));
+
+        messageBoxField.setBorder(new EmptyBorder(25, 59, 0, 250));
         rMessageField.setBorder(new LineBorder(Color.black, 1));
         messageBoxField.add(rMessage);
         messageBoxField.add(Box.createRigidArea(new Dimension(88, 0)));
-        messageBoxField.add(rMessageField);
+        messageBoxField.add(scrollPane); // Add the JScrollPane instead of the JTextArea
+
+        getContentPane().add(messageBoxField, BorderLayout.CENTER);
 
         // Button panel
         buttonsPanel = new JPanel();
         BoxLayout field4box = new BoxLayout(buttonsPanel, BoxLayout.X_AXIS);
         buttonsPanel.setLayout(field4box);
         buttonsPanel.setBackground(null);
+
+        // Attachment button
+        attachment = new JButton();
+        attachment.setMaximumSize(new Dimension(50, 50));
+        // Upload file button
+        ImageIcon uploadAttachment = new ImageIcon("images/upload.png");
+
+        attachment.setIcon(uploadAttachment);
+        attachment.setBackground(null);
+        attachment.setBorder(null);
+        attachment.setFocusable(false);
+
+        attachment.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // open fileopener
+                JFileChooser jFile = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+                int x = jFile.showOpenDialog(null);
+                if (x == JFileChooser.APPROVE_OPTION) {
+                    file = jFile.getSelectedFile().getAbsoluteFile();
+                    attachmentPresent = true;
+                }
+                System.out.println("Kindly select the attachment file");
+
+            }
+        });
+        buttonsPanel.add(attachment);
+
         // Send Button
         sendButton = new JButton();
         sendButton.setText("SEND EMAIL");
@@ -173,6 +232,7 @@ class homeScreen extends JFrame implements ActionListener {
         sendButton.setForeground(Color.BLACK);
         sendButton.setMaximumSize(new Dimension(150, 50));
         sendButton.addActionListener(this);
+        buttonsPanel.add(Box.createRigidArea(new Dimension(25, 0)));
         buttonsPanel.add(sendButton);
 
         // Schedule Button
@@ -187,10 +247,10 @@ class homeScreen extends JFrame implements ActionListener {
         scheduleButton.setForeground(Color.white);
         scheduleButton.setBackground(Color.BLACK);
         scheduleButton.setFont(new Font("Open Sans", Font.BOLD, 16));
-        scheduleButton.setMaximumSize(new Dimension(150, 50));
-        buttonsPanel.add(Box.createRigidArea(new Dimension(50, 0)));
+        scheduleButton.setMaximumSize(new Dimension(100, 50));
+        buttonsPanel.add(Box.createRigidArea(new Dimension(25, 0)));
         scheduleButton.setVisible(true);
-        buttonsPanel.setBorder(new EmptyBorder(50, 100, 0, 185));
+        buttonsPanel.setBorder(new EmptyBorder(30, 40, 30, 190));
         buttonsPanel.add(scheduleButton);
 
         buttonsPanel.add(Box.createRigidArea(new Dimension(45, 0)));
@@ -201,35 +261,11 @@ class homeScreen extends JFrame implements ActionListener {
         emailSuccessMessage.setFont(new Font("Open Sans", Font.ITALIC, 13));
         emailSuccessMessage.setBackground(null);
         emailSuccessMessage.setForeground(Color.BLACK);
-        emailSuccessMessage.setMaximumSize(new Dimension(500, 35));
+        emailSuccessMessage.setMaximumSize(new Dimension(350, 35));
         emailSuccessMessage.setVisible(false);
         buttonsPanel.add(emailSuccessMessage);
         attachmentPresent = false;
-        // Attachment button
-        attachment = new JButton();
-        attachment.setMaximumSize(new Dimension(64, 64));
-        // Upload file button
-        ImageIcon uploadAttachment = new ImageIcon("images/upload.png");
 
-        attachment.setIcon(uploadAttachment);
-        attachment.setBackground(null);
-        attachment.setBorder(null);
-        attachment.setFocusable(false);
-        attachment.setMaximumSize(new Dimension(64, 64));
-        attachment.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // open fileopener
-                JFileChooser jFile = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-                int x = jFile.showOpenDialog(null);
-                if (x == JFileChooser.APPROVE_OPTION) {
-                    file = jFile.getSelectedFile().getAbsoluteFile();
-                    attachmentPresent = true;
-                }
-                System.out.println("Kindly select the attachment file");
-
-            }
-        });
         // singleEmailPanel.add(uploadFile);
         singleEmailPanel.add(Box.createRigidArea(new Dimension(0, 0)));
         singleEmailPanel.add(reciepentMailField);
