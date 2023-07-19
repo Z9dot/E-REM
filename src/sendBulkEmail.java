@@ -16,14 +16,14 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class sendBulkEmail extends JFrame implements ActionListener {
-    /*public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
         sendBulkEmail sbe = new sendBulkEmail();
         Sidebar s = new Sidebar();
         sbe.add(s.homeSidebar);
         sbe.add(s.homeSidebarUpper);
         s.setVisible(true);
         sbe.setVisible(true);
-    }*/
+    }
 
     private JPanel emailStats;
     private JPanel singleForm;
@@ -33,8 +33,6 @@ public class sendBulkEmail extends JFrame implements ActionListener {
     private File file;
     private boolean attachmentPresent;
 
-
-
     private JPanel uploadFile;
     private JPanel sidebar;
     private JPanel field1;
@@ -43,7 +41,7 @@ public class sendBulkEmail extends JFrame implements ActionListener {
     private JPanel field4;
     private JButton sendButton;
     private JButton scheduleButton;
-    private JTextField  eSubjectField;
+    private JTextField eSubjectField;
     private JTextArea rMessageField;
     private JButton txtButton;
     private JButton attachment;
@@ -67,8 +65,6 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         add(s.homeSidebarUpper);
         s.setVisible(true);
 
-
-
         emailStats = new JPanel();
         emailStats.setBackground(Color.WHITE);
         BoxLayout h1L = new BoxLayout(emailStats, BoxLayout.X_AXIS);
@@ -80,15 +76,16 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         Image btn1modified = btn1Image.getImage().getScaledInstance(48, 48, Image.SCALE_SMOOTH);
         btn1Image = new ImageIcon(btn1modified);
 
-        //ICON 2 OF BTN 2
+        // ICON 2 OF BTN 2
         ImageIcon btn2Image = new ImageIcon("failed.png");
         Image btn2modified = btn2Image.getImage().getScaledInstance(48, 48, Image.SCALE_SMOOTH);
         btn2Image = new ImageIcon(btn2modified);
 
-        //Upload file button
+        // Upload file button
         ImageIcon uploadAttachment = new ImageIcon("upload.png");
-        //Image uploadAttachmentModified = uploadAttachment.getImage().getScaledInstance(500, 40, Image.SCALE_SMOOTH);
-        //uploadAttachment = new ImageIcon(uploadAttachmentModified);
+        // Image uploadAttachmentModified =
+        // uploadAttachment.getImage().getScaledInstance(500, 40, Image.SCALE_SMOOTH);
+        // uploadAttachment = new ImageIcon(uploadAttachmentModified);
 
         ImageIcon sendEmailIcon = new ImageIcon("sendemail.png");
         Image seIModified = sendEmailIcon.getImage().getScaledInstance(48, 48, Image.SCALE_SMOOTH);
@@ -97,7 +94,6 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         ImageIcon scheduleImageIcon = new ImageIcon("scheduleemail.png");
         Image sIIModified = scheduleImageIcon.getImage().getScaledInstance(46, 41, Image.SCALE_SMOOTH);
         scheduleImageIcon = new ImageIcon(sIIModified);
-
 
         JButton b1 = new JButton();
         b1.setText("5");
@@ -124,7 +120,6 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         b2.setIconTextGap(180);
         b2.setBorder(new TitledBorder("FAILED EMAILS"));
 
-
         // Attachment button
         attachment = new JButton();
         attachment.setMaximumSize(new Dimension(64, 64));
@@ -146,13 +141,11 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         txtButton.setMaximumSize(new Dimension(250, 40));
         txtButton.addActionListener(this);
 
-
         singleForm = new JPanel();
         BoxLayout h2L = new BoxLayout(singleForm, BoxLayout.Y_AXIS);
         singleForm.setLayout(h2L);
         singleForm.setBounds(300, 160, 1366, 769);
         singleForm.setBackground(null);
-
 
         uploadFile = new JPanel();
         BoxLayout uploadBox = new BoxLayout(uploadFile, BoxLayout.X_AXIS);
@@ -195,7 +188,7 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         JLabel rMessage = new JLabel("Message: ");
         rMessage.setFont(new Font("Open Sans", Font.BOLD, 16));
         rMessageField = new JTextArea();
-       // rMessageField.setBackground(Color.lightGray);
+        // rMessageField.setBackground(Color.lightGray);
         rMessageField.setBorder(new LineBorder(Color.lightGray, 1));
         rMessageField.setMaximumSize(new Dimension(1300, 233));
         field3.setBorder(new EmptyBorder(50, 60, 0, 540));
@@ -233,8 +226,6 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         field4.add(Box.createRigidArea(new Dimension(50, 0)));
         field4.add(scheduleButton);
 
-
-
         emailStats.add(Box.createRigidArea(new Dimension(220, 0)));
         emailStats.add(b1);
         emailStats.add(Box.createRigidArea(new Dimension(25, 0)));
@@ -249,69 +240,66 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         singleForm.add(field3);
         singleForm.add(Box.createRigidArea(new Dimension(0, -20)));
         singleForm.add(field4);
-        //  singleForm.add(Box.createRigidArea(new Dimension(0, 7)));
-
+        // singleForm.add(Box.createRigidArea(new Dimension(0, 7)));
 
         emailStats.setVisible(true);
         singleForm.setVisible(true);
-        //  uploadFile.setVisible(true);
-
+        // uploadFile.setVisible(true);
 
         add(emailStats);
         add(singleForm);
-        //  add(uploadFile);
-
+        // add(uploadFile);
 
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==txtButton){
-            bulkEmails= new ArrayList();
+        if (e.getSource() == txtButton) {
+            bulkEmails = new ArrayList();
             // open fileopener
-            JFileChooser jFile2= new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-            int x= jFile2.showOpenDialog(this);
-            if (x ==JFileChooser.APPROVE_OPTION){
-                fileEmails= jFile2.getSelectedFile( ).getAbsoluteFile();
-                FileOfEmails=fileEmails;
+            JFileChooser jFile2 = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            int x = jFile2.showOpenDialog(this);
+            if (x == JFileChooser.APPROVE_OPTION) {
+                fileEmails = jFile2.getSelectedFile().getAbsoluteFile();
+                FileOfEmails = fileEmails;
                 txtButton.setText(FileOfEmails.getName());
 
-            }
-            else {
+            } else {
                 System.out.println("Kindly select the attachment file");
             }
             try {
-                Scanner sc= new Scanner(FileOfEmails);
-                while(sc.hasNext()){
-                    String getEmail= sc.nextLine();
+                Scanner sc = new Scanner(FileOfEmails);
+                while (sc.hasNext()) {
+                    String getEmail = sc.nextLine();
                     bulkEmails.add(getEmail);
                 }
             } catch (FileNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
 
-
         }
-        if (e.getSource()==attachment){
+        if (e.getSource() == attachment) {
 
             // open fileopener
-            JFileChooser jFile= new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-            int x= jFile.showOpenDialog(this);
-            if (x ==JFileChooser.APPROVE_OPTION){
-                file= jFile.getSelectedFile().getAbsoluteFile();
-                attachmentPresent=true;
+            JFileChooser jFile = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+            int x = jFile.showOpenDialog(this);
+            if (x == JFileChooser.APPROVE_OPTION) {
+                file = jFile.getSelectedFile().getAbsoluteFile();
+                attachmentPresent = true;
             }
             System.out.println("Kindly select the attachment file");
 
         }
         if (e.getSource() == sendButton) {
-            // String source, boolean attachment, boolean schedule, String recipient, ArrayList emailList, String subject, String emailText , File file, String day, String month, String year
-            //  emailSuccessMessage.setVisible(true);
+            // String source, boolean attachment, boolean schedule, String recipient,
+            // ArrayList emailList, String subject, String emailText , File file, String
+            // day, String month, String year
+            // emailSuccessMessage.setVisible(true);
 
             try {
-                emailAutomation instantEmail= new emailAutomation("bulk",attachmentPresent, false, rMessageField.getText(), bulkEmails, eSubjectField.getText(), rMessageField.getText(), file, null, null, null);
+                emailAutomation instantEmail = new emailAutomation("bulk", attachmentPresent, false,
+                        rMessageField.getText(), bulkEmails, eSubjectField.getText(), rMessageField.getText(), file,
+                        null, null, null);
                 instantEmail.setVisible(true);
             } catch (MessagingException ex) {
                 throw new RuntimeException(ex);
@@ -320,9 +308,9 @@ public class sendBulkEmail extends JFrame implements ActionListener {
             }
         }
         if (e.getSource() == scheduleButton) {
-                scheduleEmail schedule= new scheduleEmail("bulk", attachmentPresent, true, rMessageField.getText(), bulkEmails, eSubjectField.getText(), rMessageField.getText(), file);
-                schedule.setVisible(true);
-
+            scheduleEmail schedule = new scheduleEmail("bulk", attachmentPresent, true, rMessageField.getText(),
+                    bulkEmails, eSubjectField.getText(), rMessageField.getText(), file);
+            schedule.setVisible(true);
 
         }
     }
