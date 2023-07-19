@@ -135,33 +135,7 @@ class homeScreen extends JFrame implements ActionListener {
         subjectField.add(Box.createRigidArea(new Dimension(52, 0)));
         subjectField.add(eSubjectField);
 
-        // // Message Box
-        // messageBoxField = new JPanel();
-        // BoxLayout field3box = new BoxLayout(messageBoxField, BoxLayout.X_AXIS);
-        // messageBoxField.setLayout(field3box);
-        // messageBoxField.setBackground(null);
-        // rMessage = new JLabel("Message: ");
-        // rMessage.setFont(new Font("Open Sans", Font.BOLD, 16));
-        // rMessageField = new JTextArea();
-        // rMessageField.setLineWrap(true);
-
-        // // Add the JTextArea to a JScrollPane to enable scrolling if the text exceeds
-        // // the visible area
-        // JScrollPane scrollPane = new JScrollPane(rMessageField);
-        // scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-
-        // // Add the JScrollPane to the JFrame
-        // messageBoxField.add(scrollPane);
-
-        // // Add the JScrollPane to the JFrame
-
-        // rMessageField.setMaximumSize(new Dimension(1300, 273));
-        // messageBoxField.setBorder(new EmptyBorder(50, 59, 0, 250));
-        // rMessageField.setBorder(new LineBorder(Color.black, 1));
-        // messageBoxField.add(rMessage);
-        // messageBoxField.add(Box.createRigidArea(new Dimension(88, 0)));
-        // messageBoxField.add(rMessageField);
-
+        // Message Box
         messageBoxField = new JPanel();
         BoxLayout field3box = new BoxLayout(messageBoxField, BoxLayout.X_AXIS);
         messageBoxField.setLayout(field3box);
@@ -180,7 +154,7 @@ class homeScreen extends JFrame implements ActionListener {
         rMessageField.setBorder(new LineBorder(Color.black, 1));
         messageBoxField.add(rMessage);
         messageBoxField.add(Box.createRigidArea(new Dimension(88, 0)));
-        messageBoxField.add(scrollPane); // Add the JScrollPane instead of the JTextArea
+        messageBoxField.add(scrollPane);
 
         getContentPane().add(messageBoxField, BorderLayout.CENTER);
 
@@ -210,8 +184,8 @@ class homeScreen extends JFrame implements ActionListener {
                 if (x == JFileChooser.APPROVE_OPTION) {
                     file = jFile.getSelectedFile().getAbsoluteFile();
                     attachmentPresent = true;
+                    System.out.println("File Selected");
                 }
-                System.out.println("Kindly select the attachment file");
 
             }
         });
@@ -416,48 +390,7 @@ class homeScreen extends JFrame implements ActionListener {
             card.show(blankPanel, "Single Email");
         }
 
-        // Add other conditions for other buttons here
     }
-
-    // @Override
-    // public void actionPerformed(ActionEvent e) {
-    // if (e.getSource() == dashboard_button) {
-    // homeScreen hs = null;
-    // try {
-    // hs = new homeScreen();
-    // } catch (IOException ex) {
-    // throw new RuntimeException(ex);
-    // }
-    // hs.setVisible(true);
-    // dispose();
-    // }
-    // if (e.getSource() == composeMail_Button) {
-    // sendSingleEmail sse = null;
-    // try {
-    // sse = new sendSingleEmail(null, null, null);
-    // } catch (IOException ex) {
-    // throw new RuntimeException(ex);
-    // }
-    // sse.setVisible(true);
-    // dispose();
-
-    // }
-    // if (e.getSource() == bulkMail_Button) {
-    // sendBulkEmail sbe = null;
-    // try {
-    // sbe = new sendBulkEmail();
-    // } catch (IOException ex) {
-    // throw new RuntimeException(ex);
-    // }
-    // sbe.setVisible(true);
-    // dispose();
-    // }
-
-    // if (e.getSource() == manageContact_Button) {
-    // // open contacts management frame
-    // }
-
-    // }
 }
 
 /*
