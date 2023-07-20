@@ -59,7 +59,6 @@ public class loginScreen extends JFrame {
                 homeScreen homescreen;
                 try {
                     dispose();
-                    System.out.println(userEmail);
                     homescreen = new homeScreen(userEmail);
                     homescreen.setVisible(true);
                 } catch (IOException e1) {
