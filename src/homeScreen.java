@@ -342,12 +342,13 @@ class homeScreen extends JFrame implements ActionListener {
 
         homeSidebarUpper.add(Box.createRigidArea(new Dimension(44, 25)));
         homeSidebarUpper.add(accountCredentials(UserEmail, "images/account icon tp.png"));
-
+        sendBulkEmail sbe = new sendBulkEmail();
         card = new CardLayout();
         blankPanel = new JPanel(card);
         blankPanel.setBounds(300, 140, 1000, 550);
         blankPanel.add(dashboardPanel(), "Dashboard");
         blankPanel.add(singleEmailPanel(), "Single Email");
+        blankPanel.add(sbe.bulkEmailPanel(), "Bulk Email");
 
         homeSidebar.add(Box.createRigidArea(new Dimension(0, 50)));
         homeSidebar.add(dashboard_button);
@@ -388,9 +389,11 @@ class homeScreen extends JFrame implements ActionListener {
 
         else if (e.getSource() == composeMail_Button) {
             card.show(blankPanel, "Single Email");
+        } else if (e.getSource() == bulkMail_Button) {
+            card.show(blankPanel, "Bulk Email");
         }
-
     }
+
 }
 
 /*
