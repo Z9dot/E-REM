@@ -6,6 +6,7 @@ import java.awt.*;
 import java.io.File;
 
 import java.lang.Thread;
+import java.net.PasswordAuthentication;
 import java.io.IOException;
 
 import java.util.*;
@@ -14,44 +15,46 @@ import java.util.Calendar;
 
 public class emailAutomation extends JFrame {
     public static void main(String[] args) throws IOException {
-        File f= new File("contacts.png");
-        ArrayList emailsList= new ArrayList();
+        File f = new File("contacts.png");
+        ArrayList emailsList = new ArrayList();
         emailsList.add("growiconic@gmail.com");
         emailsList.add("digitalhumayun@gmail.com");
 
         emailAutomation email;
         try {
             // Parameters for this master constructor
-            // String source, boolean attachment, boolean schedule, String recipient, ArrayList emailList, String subject, String emailText , File file, String day, String month, String year
-            email = new emailAutomation("bulk", true, false, null, emailsList, "Welcome To Java Bulk Attached", "JAVA is an OOP oriented language - Wonderful approach", f, null, null,  null);
+            // String source, boolean attachment, boolean schedule, String recipient,
+            // ArrayList emailList, String subject, String emailText , File file, String
+            // day, String month, String year
+            email = new emailAutomation("bulk", true, false, null, emailsList, "Welcome To Java Bulk Attached",
+                    "JAVA is an OOP oriented language - Wonderful approach", f, null, null, null);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
 
-
     }
+
     private JPanel home1;
     private JButton btn;
     private JButton btn2;
     ArrayList<String> rEmails;
 
-    public void simpleEmails(String recipient, String subject, String emailText){
-        loginScreen login= new loginScreen();
+    public void simpleEmails(String recipient, String subject, String emailText) {
+        loginScreen login = new loginScreen();
 
+        final String email = "digitalhamayun@gmail.com"; // login.getUseremail
+        final String password = "mzzxcrkeccesptuj"; // login.getUserpass
+        final String host = "smtp.gmail.com";
+        final String port = "587";
 
-        final String email= "digitalhamayun@gmail.com"; //login.getUseremail
-        final String password= "mzzxcrkeccesptuj"; //login.getUserpass
-        final String host= "smtp.gmail.com";
-        final String port= "587";
-
-        Properties properties= new Properties();
+        Properties properties = new Properties();
         properties.put("mail.smtp.auth", true);
         properties.put("mail.smtp.starttls.enable", true);
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", port);
 
-        Session session= Session.getDefaultInstance(properties,
-                new Authenticator(){
+        Session session = Session.getDefaultInstance(properties,
+                new Authenticator() {
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(email, password);
@@ -66,26 +69,26 @@ public class emailAutomation extends JFrame {
             msg.setText(emailText);
             Transport.send(msg);
 
-
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
+
     public void attachmentEmails(String recipient, String subject, String emailText, File file) throws IOException {
 
-        final String email= "digitalhamayun@gmail.com";
-        final String password= "mzzxcrkeccesptuj";
-        final String host= "smtp.gmail.com";
-        final String port= "587";
+        final String email = "digitalhamayun@gmail.com";
+        final String password = "mzzxcrkeccesptuj";
+        final String host = "smtp.gmail.com";
+        final String port = "587";
 
-        Properties properties= new Properties();
+        Properties properties = new Properties();
         properties.put("mail.smtp.auth", true);
         properties.put("mail.smtp.starttls.enable", true);
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", port);
 
-        Session session= Session.getDefaultInstance(properties,
-                new Authenticator(){
+        Session session = Session.getDefaultInstance(properties,
+                new Authenticator() {
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(email, password);
@@ -98,11 +101,11 @@ public class emailAutomation extends JFrame {
             msg.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
             msg.setSubject(subject);
 
-            MimeBodyPart content= new MimeBodyPart();
+            MimeBodyPart content = new MimeBodyPart();
             content.setText(emailText);
-            MimeBodyPart eAttachment= new MimeBodyPart();
+            MimeBodyPart eAttachment = new MimeBodyPart();
             eAttachment.attachFile(file);
-            MimeMultipart multiEmail= new MimeMultipart();
+            MimeMultipart multiEmail = new MimeMultipart();
             multiEmail.addBodyPart(content);
             multiEmail.addBodyPart(eAttachment);
             msg.setContent(multiEmail);
@@ -112,20 +115,21 @@ public class emailAutomation extends JFrame {
             throw new RuntimeException(e);
         }
     }
-    public void simpleBulkEmail(ArrayList emailList, String subject, String emailText ) throws MessagingException {
-        final String email= "digitalhamayun@gmail.com";
-        final String password= "mzzxcrkeccesptuj";
-        final String host= "smtp.gmail.com";
-        final String port= "587";
 
-        Properties properties= new Properties();
+    public void simpleBulkEmail(ArrayList emailList, String subject, String emailText) throws MessagingException {
+        final String email = "digitalhamayun@gmail.com";
+        final String password = "mzzxcrkeccesptuj";
+        final String host = "smtp.gmail.com";
+        final String port = "587";
+
+        Properties properties = new Properties();
         properties.put("mail.smtp.auth", true);
         properties.put("mail.smtp.starttls.enable", true);
         properties.put("mail.smtp.host", host);
         properties.put("mail.smtp.port", port);
 
-        Session session= Session.getDefaultInstance(properties,
-                new Authenticator(){
+        Session session = Session.getDefaultInstance(properties,
+                new Authenticator() {
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication(email, password);
@@ -144,7 +148,9 @@ public class emailAutomation extends JFrame {
         }
 
     }
-    public void attachmentBulkEmail(ArrayList emailList, String subject, String emailText , File file) throws MessagingException, IOException {
+
+    public void attachmentBulkEmail(ArrayList emailList, String subject, String emailText, File file)
+            throws MessagingException, IOException {
         final String email = "digitalhamayun@gmail.com";
         final String password = "mzzxcrkeccesptuj";
         final String host = "smtp.gmail.com";
@@ -183,8 +189,9 @@ public class emailAutomation extends JFrame {
         }
     }
 
-
-    public emailAutomation(String source, boolean attachment, boolean schedule, String recipient, ArrayList emailList, String subject, String emailText , File file, String day, String month, String year) throws MessagingException, IOException {
+    public emailAutomation(String source, boolean attachment, boolean schedule, String recipient, ArrayList emailList,
+            String subject, String emailText, File file, String day, String month, String year)
+            throws MessagingException, IOException {
         setSize(400, 400);
         setResizable(false);
         setTitle("E-REM V 1.0");
@@ -192,20 +199,18 @@ public class emailAutomation extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setBackground(new Color(244, 246, 248));
 
-        boolean isScheduled= false;
+        boolean isScheduled = false;
 
         home1 = new JPanel();
         BoxLayout h1Box = new BoxLayout(home1, BoxLayout.Y_AXIS);
         home1.setLayout(h1Box);
         home1.setBackground(null);
 
+        ImageIcon emailIcon = new ImageIcon("emailmarketing.png");
+        Image eModified = emailIcon.getImage().getScaledInstance(250, 200, Image.SCALE_SMOOTH);
+        emailIcon = new ImageIcon(eModified);
 
-        ImageIcon emailIcon= new ImageIcon("emailmarketing.png");
-        Image eModified= emailIcon.getImage().getScaledInstance(250, 200, Image.SCALE_SMOOTH);
-        emailIcon= new ImageIcon(eModified);
-
-
-        JButton emailIconBtn= new JButton();
+        JButton emailIconBtn = new JButton();
         emailIconBtn.setIcon(emailIcon);
         emailIconBtn.setBackground(null);
         emailIconBtn.setFocusable(false);
@@ -218,29 +223,26 @@ public class emailAutomation extends JFrame {
         btn.setFont(new Font("Open Sans", Font.BOLD, 15));
         btn.setBackground(null);
         btn.setForeground(Color.BLACK);
-        btn.setMaximumSize(new Dimension(270 , 35));
-
+        btn.setMaximumSize(new Dimension(270, 35));
 
         if (source.equalsIgnoreCase("single")) {
 
-            if (attachment == false && schedule==false) {
+            if (attachment == false && schedule == false) {
                 simpleEmails(recipient, subject, emailText);
-            }
-            else if(attachment==true && schedule==false){
+            } else if (attachment == true && schedule == false) {
                 attachmentEmails(recipient, subject, emailText, file);
 
-            }
-            else if (schedule == true && attachment== false){
-                isScheduled= true;
-               Timer t= new Timer();
+            } else if (schedule == true && attachment == false) {
+                isScheduled = true;
+                Timer t = new Timer();
 
-               TimerTask task= new TimerTask() {
-                   @Override
-                   public void run() {
-                       simpleEmails(recipient, subject, emailText);
-                   }
-               };
-                Calendar fetchDate= Calendar.getInstance();
+                TimerTask task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        simpleEmails(recipient, subject, emailText);
+                    }
+                };
+                Calendar fetchDate = Calendar.getInstance();
                 fetchDate.set(Calendar.YEAR, Integer.parseInt(year));
                 fetchDate.set(Calendar.MONTH, Integer.parseInt(month));
                 fetchDate.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
@@ -248,13 +250,12 @@ public class emailAutomation extends JFrame {
                 fetchDate.set(Calendar.MINUTE, 0);
                 fetchDate.set(Calendar.SECOND, 0);
 
-                 t.schedule(task, fetchDate.getTime());
-            }
-            else if(schedule==true && attachment==true){
-                isScheduled= true;
-                Timer t= new Timer();
+                t.schedule(task, fetchDate.getTime());
+            } else if (schedule == true && attachment == true) {
+                isScheduled = true;
+                Timer t = new Timer();
 
-                TimerTask task= new TimerTask() {
+                TimerTask task = new TimerTask() {
                     @Override
                     public void run() {
                         try {
@@ -264,7 +265,7 @@ public class emailAutomation extends JFrame {
                         }
                     }
                 };
-                Calendar fetchDate= Calendar.getInstance();
+                Calendar fetchDate = Calendar.getInstance();
                 fetchDate.set(Calendar.YEAR, Integer.parseInt(year));
                 fetchDate.set(Calendar.MONTH, Integer.parseInt(month));
                 fetchDate.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
@@ -280,21 +281,19 @@ public class emailAutomation extends JFrame {
 
         if (source.equalsIgnoreCase("bulk")) {
 
-            if (attachment == false && schedule==false) {
+            if (attachment == false && schedule == false) {
                 simpleBulkEmail(emailList, subject, emailText);
 
-                }
+            }
 
-            else if(attachment==true && schedule==false){
+            else if (attachment == true && schedule == false) {
                 attachmentBulkEmail(emailList, subject, emailText, file);
 
-            }
-            else if(attachment==false && schedule==true){
-                isScheduled= true;
-                Timer t2= new Timer();
+            } else if (attachment == false && schedule == true) {
+                isScheduled = true;
+                Timer t2 = new Timer();
 
-
-                TimerTask task2= new TimerTask() {
+                TimerTask task2 = new TimerTask() {
                     @Override
                     public void run() {
                         try {
@@ -305,7 +304,7 @@ public class emailAutomation extends JFrame {
                     }
 
                 };
-                Calendar fetchDate= Calendar.getInstance();
+                Calendar fetchDate = Calendar.getInstance();
                 fetchDate.set(Calendar.YEAR, Integer.parseInt(year));
                 fetchDate.set(Calendar.MONTH, Integer.parseInt(month));
                 fetchDate.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
@@ -315,12 +314,11 @@ public class emailAutomation extends JFrame {
 
                 t2.schedule(task2, fetchDate.getTime());
 
-            }
-            else if(attachment==true && schedule==true){
-                isScheduled= true;
-                Timer t3= new Timer();
+            } else if (attachment == true && schedule == true) {
+                isScheduled = true;
+                Timer t3 = new Timer();
 
-                TimerTask task3= new TimerTask() {
+                TimerTask task3 = new TimerTask() {
                     @Override
                     public void run() {
                         try {
@@ -330,7 +328,7 @@ public class emailAutomation extends JFrame {
                         }
                     }
                 };
-                Calendar fetchDate= Calendar.getInstance();
+                Calendar fetchDate = Calendar.getInstance();
                 fetchDate.set(Calendar.YEAR, Integer.parseInt(year));
                 fetchDate.set(Calendar.MONTH, Integer.parseInt(month));
                 fetchDate.set(Calendar.DAY_OF_MONTH, Integer.parseInt(day));
@@ -342,11 +340,9 @@ public class emailAutomation extends JFrame {
 
         }
 
-
-
         home1.add(Box.createRigidArea(new Dimension(105, 0)));
         home1.add(emailIconBtn);
-        if (isScheduled==true){
+        if (isScheduled == true) {
             btn.setText("SCHEDULED SUCCESSFULLY");
         }
         home1.add(btn);
