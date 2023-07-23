@@ -40,6 +40,8 @@ public class sendBulkEmail extends JFrame implements ActionListener {
     private JButton addReciepentButton;
     private ImageIcon addIcon;
     private ImageIcon fAdd;
+    private boolean attachmentPresent;
+    private ArrayList<String> Emails = new ArrayList<>();
 
     public JPanel bulkEmailPanel() {
         bulkEmailPanel = new JPanel();
@@ -64,6 +66,21 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         addReciepentButton.setIcon(fAdd);
         addReciepentButton.setFocusable(false);
         addReciepentButton.setPreferredSize(new Dimension(10, 8));
+        addReciepentButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String em = rEmailField.getText().toString();
+                if ((em.contains("@gmail.com") || em.contains("@outlook.com")) && !em.equals(null)) {
+                    Emails.add(em);
+                    rEmailField.setText(null);
+                } else {
+                    JOptionPane.showMessageDialog(rEmailField, "Invali Email Address", "Message",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+            }
+
+        });
         reciepentsMailField.add(rEmail);
         reciepentsMailField.add(Box.createRigidArea(new Dimension(40, 0)));
         reciepentsMailField.add(rEmailField);
@@ -124,6 +141,8 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         attachment.setFocusable(false);
 
         attachment.addActionListener(new ActionListener() {
+            private File file;
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 // open fileopener
@@ -200,23 +219,6 @@ public class sendBulkEmail extends JFrame implements ActionListener {
         bulkEmailPanel.setVisible(true);
         return bulkEmailPanel;
     }
-
-    private JPanel emailStats;
-    private JPanel singleForm;
-    private File fileEmails;
-    private File FileOfEmails;
-
-    private File file;
-    private boolean attachmentPresent;
-
-    private JPanel uploadFile;
-    private JPanel sidebar;
-    private JPanel field1;
-    private JPanel field2;
-    private JPanel field3;
-    private JPanel field4;
-
-    private ArrayList bulkEmails;
 
     public sendBulkEmail() throws IOException {
         // setSize(1366, 768);
